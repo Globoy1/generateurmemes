@@ -4,186 +4,211 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Générateur de Mèmes</title>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Icônes Feather -->
   <script src="https://unpkg.com/feather-icons"></script>
+
+  <!-- Icône du site -->
   <link rel="icon" href="https://emojiapi.dev/api/v1/smiling_face_with_sunglasses.svg" />
 </head>
 
 <body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen font-sans">
-  <!-- En-tête simple -->
+
+  <!-- En-tête du site -->
   <header class="bg-white border-b border-gray-200">
-    <div class="container mx-auto px-4 py-4">
-      <h1 class="text-2xl font-semibold text-center">
+    <div class="max-w-5xl xl:max-w-6xl mx-auto px-4 py-4">
+      <h1 class="text-2xl sm:text-3xl font-semibold text-center">
         Générateur de Mèmes
       </h1>
     </div>
   </header>
 
   <!-- Contenu principal -->
-  <main class="flex-grow container mx-auto px-4 py-6 space-y-6">
-    <!-- Éditeur -->
-    <section class="bg-white border border-gray-200 rounded-lg p-4 md:p-6">
-      <h2 class="text-xl font-semibold mb-4 text-center">
-        Créer un mème
-      </h2>
+  <main class="flex-grow px-2 sm:px-4 py-4 sm:py-6">
+    <div class="max-w-5xl xl:max-w-6xl mx-auto space-y-6 sm:space-y-8">
 
-      <div class="flex flex-col md:flex-row gap-6 items-start">
-        <!-- Panneau de contrôle -->
-        <div class="flex-1 space-y-4">
-          <div>
-            <label for="imageInput" class="block text-sm font-medium mb-1">
-              Image
-            </label>
-            <input
-              type="file"
-              id="imageInput"
-              accept="image/*"
-              class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+      <!-- Bloc de création du mème -->
+      <section class="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 lg:p-8">
+        <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-center">
+          Créer un mème
+        </h2>
 
-          <div>
-            <label for="topText" class="block text-sm font-medium mb-1">
-              Texte du haut
-            </label>
-            <input
-              type="text"
-              id="topText"
-              placeholder="Texte du haut..."
-              class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+        <!-- Organisation : colonne sur mobile, rangée sur grand écran -->
+        <div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
 
-          <div>
-            <label for="bottomText" class="block text-sm font-medium mb-1">
-              Texte du bas
-            </label>
-            <input
-              type="text"
-              id="bottomText"
-              placeholder="Texte du bas..."
-              class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+          <!-- Zone des contrôles -->
+          <div class="flex-1 w-full space-y-4">
 
-          <div class="grid grid-cols-2 gap-4 text-sm">
+            <!-- Importer une image -->
             <div>
-              <label for="fontSelect" class="block text-sm font-medium mb-1">
-                Police
+              <label for="imageInput" class="block text-sm font-medium mb-1">
+                Image
               </label>
-              <select
-                id="fontSelect"
-                class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+              <input
+                type="file"
+                id="imageInput"
+                accept="image/*"
+                class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-1 focus:ring-blue-500"
+              />
+            </div>
+
+            <!-- Texte du haut -->
+            <div>
+              <label for="topText" class="block text-sm font-medium mb-1">
+                Texte du haut
+              </label>
+              <input
+                type="text"
+                id="topText"
+                placeholder="Texte du haut..."
+                class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-1 focus:ring-blue-500"
+              />
+            </div>
+
+            <!-- Texte du bas -->
+            <div>
+              <label for="bottomText" class="block text-sm font-medium mb-1">
+                Texte du bas
+              </label>
+              <input
+                type="text"
+                id="bottomText"
+                placeholder="Texte du bas..."
+                class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-1 focus:ring-blue-500"
+              />
+            </div>
+
+            <!-- Options : police, taille, couleurs -->
+            <div class="grid grid-cols-2 gap-4 text-sm">
+
+              <div>
+                <label for="fontSelect" class="block text-sm font-medium mb-1">
+                  Police
+                </label>
+                <select
+                  id="fontSelect"
+                  class="w-full border border-gray-300 rounded-md px-3 py-2"
+                >
+                  <option value="Arial">Arial</option>
+                  <option value="Comic Sans MS">Comic Sans MS</option>
+                  <option value="Times New Roman">Times New Roman</option>
+                  <option value="Courier New">Courier New</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="fontSize" class="block text-sm font-medium mb-1">
+                  Taille
+                </label>
+                <input
+                  type="number"
+                  id="fontSize"
+                  value="28"
+                  min="10"
+                  max="80"
+                  class="w-full border border-gray-300 rounded-md px-3 py-2"
+                />
+              </div>
+
+              <div>
+                <label for="textColor" class="block text-sm font-medium mb-1">
+                  Couleur du texte
+                </label>
+                <input
+                  type="color"
+                  id="textColor"
+                  value="#ffffff"
+                  class="w-full border border-gray-300 rounded-md h-9 cursor-pointer"
+                />
+              </div>
+
+              <div>
+                <label for="strokeColor" class="block text-sm font-medium mb-1">
+                  Contour du texte
+                </label>
+                <input
+                  type="color"
+                  id="strokeColor"
+                  value="#000000"
+                  class="w-full border border-gray-300 rounded-md h-9 cursor-pointer"
+                />
+              </div>
+            </div>
+
+            <!-- Boutons : reset, téléchargement, partage -->
+            <div class="flex flex-wrap gap-3 pt-1">
+              <button
+                id="resetBtn"
+                class="inline-flex items-center gap-2 border border-gray-300 rounded-md px-3 py-2 text-sm hover:bg-gray-100"
               >
-                <option value="Arial">Arial</option>
-                <option value="Comic Sans MS">Comic Sans MS</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Courier New">Courier New</option>
-              </select>
-            </div>
+                <i data-feather="rotate-ccw" class="w-4 h-4"></i>
+                Réinitialiser
+              </button>
 
-            <div>
-              <label for="fontSize" class="block text-sm font-medium mb-1">
-                Taille
-              </label>
-              <input
-                type="number"
-                id="fontSize"
-                value="28"
-                min="10"
-                max="80"
-                class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
-              />
-            </div>
+              <button
+                id="downloadBtn"
+                class="inline-flex items-center gap-2 bg-blue-600 text-white rounded-md px-3 py-2 text-sm hover:bg-blue-700"
+              >
+                <i data-feather="download" class="w-4 h-4"></i>
+                Télécharger
+              </button>
 
-            <div>
-              <label for="textColor" class="block text-sm font-medium mb-1">
-                Couleur du texte
-              </label>
-              <input
-                type="color"
-                id="textColor"
-                value="#ffffff"
-                class="w-full border border-gray-300 rounded-md h-9 cursor-pointer"
-              />
-            </div>
-
-            <div>
-              <label for="strokeColor" class="block text-sm font-medium mb-1">
-                Contour du texte
-              </label>
-              <input
-                type="color"
-                id="strokeColor"
-                value="#000000"
-                class="w-full border border-gray-300 rounded-md h-9 cursor-pointer"
-              />
+              <button
+                id="shareBtn"
+                class="inline-flex items-center gap-2 bg-green-600 text-white rounded-md px-3 py-2 text-sm hover:bg-green-700"
+              >
+                <i data-feather="share-2" class="w-4 h-4"></i>
+                Partager
+              </button>
             </div>
           </div>
 
-          <div class="flex flex-wrap gap-3 pt-1">
-            <button
-              id="resetBtn"
-              class="inline-flex items-center gap-2 border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
-            >
-              <i data-feather="rotate-ccw" class="w-4 h-4"></i>
-              Réinitialiser
-            </button>
-
-            <button
-              id="downloadBtn"
-              class="inline-flex items-center gap-2 bg-blue-600 text-white rounded-md px-3 py-2 text-sm hover:bg-blue-700"
-            >
-              <i data-feather="download" class="w-4 h-4"></i>
-              Télécharger
-            </button>
-
-            <button
-              id="shareBtn"
-              class="inline-flex items-center gap-2 bg-green-600 text-white rounded-md px-3 py-2 text-sm hover:bg-green-700"
-            >
-              <i data-feather="share-2" class="w-4 h-4"></i>
-              Partager
-            </button>
+          <!-- Zone du canvas (image du mème) -->
+          <div class="flex-1 w-full flex justify-center lg:justify-end">
+            <div class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+              <canvas
+                id="memeCanvas"
+                width="500"
+                height="500"
+                class="w-full h-auto border border-gray-300 rounded-md bg-gray-50"
+              ></canvas>
+            </div>
           </div>
         </div>
+      </section>
 
-        <!-- Canvas -->
-        <div class="flex-1 flex justify-center">
-          <canvas
-            id="memeCanvas"
-            width="500"
-            height="500"
-            class="border border-gray-300 rounded-md bg-gray-50"
-          ></canvas>
+      <!-- Galerie des mèmes -->
+      <section class="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 lg:p-8">
+        <h2 class="text-xl sm:text-2xl font-semibold mb-4 text-center">
+          Galerie des mèmes
+        </h2>
+        <div
+          id="galleryContainer"
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
+        >
+          <!-- Les mèmes créés s’ajoutent ici -->
         </div>
-      </div>
-    </section>
-
-    <!-- Galerie -->
-    <section class="bg-white border border-gray-200 rounded-lg p-4 md:p-6">
-      <h2 class="text-xl font-semibold mb-4 text-center">
-        Galerie des mèmes
-      </h2>
-      <div
-        id="galleryContainer"
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
-      >
-        <!-- Les mèmes générés seront ajoutés ici par JavaScript -->
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
 
-  <!-- Pied de page simple -->
-  <footer class="bg-white border-t border-gray-200">
-    <div class="container mx-auto px-4 py-3 text-center text-xs text-gray-500">
+  <!-- Pied de page -->
+  <footer class="bg-white border-t border-gray-200 mt-4">
+    <div class="max-w-5xl xl:max-w-6xl mx-auto px-4 py-3 text-center text-xs text-gray-500">
       © 2025 Générateur de Mèmes
     </div>
   </footer>
 
+  <!-- Script principal -->
   <script src="script.js"></script>
+
+  <!-- Activation des icônes -->
   <script>
     feather.replace();
   </script>
+
 </body>
 </html>
