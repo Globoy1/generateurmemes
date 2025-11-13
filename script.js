@@ -108,40 +108,47 @@ function loadGallery() {
   galleryContainer.innerHTML = "";
   const memes = JSON.parse(localStorage.getItem("memes")) || [];
 
+  // Si aucun mème : état vide simple
   if (memes.length === 0) {
-  galleryContainer.className =
-    "flex flex-col items-center justify-center w-full h-64 text-center text-gray-600 rounded-xl bg-white";
-  galleryContainer.innerHTML = `
-    <i data-feather="image" class="w-12 h-12 mb-3 text-gray-400"></i>
-    <p class="text-lg">Aucun mème enregistré pour le moment.</p>
-  `;
-  feather.replace();
-  return;
-} else {
-  galleryContainer.className =
-    "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 text-center justify-center items-center";
-}
+    galleryContainer.className =
+      "flex flex-col items-center justify-center w-full h-40 text-center text-gray-500";
+    galleryContainer.innerHTML = `
+      <p class="text-sm text-gray-500">Aucun mème pour le moment.</p>
+    `;
+    return;
+  }
 
-
+  // Sinon : grille de mèmes
+  galleryContainer.className =
+    "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4";
 
   memes.forEach((src, index) => {
     const item = document.createElement("div");
-    item.classList.add("meme-item");
+    item.className =
+      "flex flex-col items-center border border-gray-200 rounded-lg p-3 bg-white";
 
     const img = document.createElement("img");
     img.src = src;
+    img.alt = "Mème enregistré";
+    img.className = "w-full h-auto max-h-40 object-contain mb-2";
 
-    // Boutons Partager & Supprimer
+    // Conteneur des boutons
     const btnContainer = document.createElement("div");
-    btnContainer.classList.add("meme-buttons");
+    btnContainer.className = "flex gap-3 mt-1 text-sm";
 
     const shareBtn = document.createElement("button");
     shareBtn.textContent = "Partager";
+    shareBtn.className =
+      "text-blue-600 hover:underline";
     shareBtn.addEventListener("click", async () => {
       const blob = await fetch(src).then(res => res.blob());
       const file = new File([blob], "meme.png", { type: "image/png" });
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        await navigator.share({ files: [file], title: "Mon mème", text: "Regarde mon mème" });
+        await navigator.share({
+          files: [file],
+          title: "Mon mème",
+          text: "Regarde mon mème",
+        });
       } else {
         alert("Le partage n'est pas supporté sur ce navigateur.");
       }
@@ -149,6 +156,8 @@ function loadGallery() {
 
     const delBtn = document.createElement("button");
     delBtn.textContent = "Supprimer";
+    delBtn.className =
+      "text-red-600 hover:underline";
     delBtn.addEventListener("click", () => {
       memes.splice(index, 1);
       localStorage.setItem("memes", JSON.stringify(memes));
@@ -157,6 +166,7 @@ function loadGallery() {
 
     btnContainer.appendChild(shareBtn);
     btnContainer.appendChild(delBtn);
+
     item.appendChild(img);
     item.appendChild(btnContainer);
     galleryContainer.appendChild(item);
@@ -164,4 +174,4 @@ function loadGallery() {
 }
 
   // Charge automatiquement la galerie au lancement de la page
-  loadGallery();
+loadGallery();
